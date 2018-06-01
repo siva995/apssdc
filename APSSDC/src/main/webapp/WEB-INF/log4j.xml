@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- shall we move this file to resources folder -->
+
+<log4j:configuration>
+	<appender name="consoleLogger" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p  [%c{1}] %m %n" />
+		</layout>
+	</appender>
+	<appender name="fileLogger" class="org.apache.log4j.RollingFileAppender">
+		<param name="file" value="${catalina.base}/logs/apssdc.log" />
+		<param name="append" value="true" />
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>
+				apssdc.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>
+				30
+			</maxHistory>
+		</rollingPolicy>
+
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p  [%c{1}] %m %n" />
+		</layout>
+	</appender>
+
+	<root>
+		<level value="INFO" />
+	 <appender-ref ref="consoleLogger"/> 
+		<!-- <appender-ref ref="fileLogger" /> -->
+	</root>
+</log4j:configuration>
